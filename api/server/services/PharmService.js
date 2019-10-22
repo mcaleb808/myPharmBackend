@@ -3,7 +3,7 @@ import { Pharmacie } from '../src/models';
 export default class PharmService {
   static async getAllPharms() {
     try {
-      return await database.Pharmacie.findAll();
+      return await Pharmacie.findAll();
     } catch (err) {
       throw err;
     }
@@ -19,14 +19,14 @@ export default class PharmService {
 
   static async updatePharm(id, updatePharm) {
     try {
-      const pharmToUpdate = await database.Pharmacie.findOne({
+      const pharmToUpdate = await Pharmacie.findOne({
         where: {
           id: Number(id)
         }
       });
 
       if (pharmToUpdate) {
-        await database.Pharmacie.update(updatePharm, {
+        await Pharmacie.update(updatePharm, {
           where: {
             id: Number(id)
           }
@@ -39,7 +39,7 @@ export default class PharmService {
 
   static async getAPharm(id) {
     try {
-      const thePharm = await database.Pharmacie.findOne({
+      const thePharm = await Pharmacie.findOne({
         where: {
           id: Number(id)
         }
@@ -52,14 +52,14 @@ export default class PharmService {
 
   static async deletePharm(id) {
     try {
-      const pharmToDelete = await database.Pharmacie.findOne({
+      const pharmToDelete = await Pharmacie.findOne({
         where: {
           id: Number(id)
         }
       });
 
       if (pharmToDelete) {
-        await database.Pharmacie.destroy({
+        await Pharmacie.destroy({
           where: {
             id: Number(id)
           }
