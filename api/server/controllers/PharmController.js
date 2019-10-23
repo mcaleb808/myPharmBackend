@@ -20,15 +20,21 @@ class PharmController {
   }
 
   static async addPharm(req, res) {
-    if (!req.body.name || !req.body.location) {
+    if (!req.body.name || !req.body.logo) {
       util.setError(400, 'Please provide complete details');
       return util.send(res);
     }
 
     const newPharm = req.body;
 
+    const insurances = [...new Set(newPharm.insurance)];
+
     try {
-      const createPharm = await PharmService.addPharm(newPharm);
+      const createPharm = await PharmService.addPharm({
+        name: newPharm.name,
+        logo: newPharm.logo,
+        insurance: insurances
+      });
       util.setSuccess(201, 'Pharm Added', createPharm);
       return util.send(res);
     } catch (err) {
@@ -40,10 +46,7 @@ class PharmController {
   static async updatePharm(req, res) {
     const updatedPharm = req.body;
     const { id } = req.params;
-    if (Number(id)) {
-      util.setError(400, 'Please input a valid numeric value');
-      return util.send(res);
-    }
+
     try {
       const updatePharm = await PharmService.updatePharm(id, updatedPharm);
       if (!updatedPharm) {
@@ -60,11 +63,6 @@ class PharmController {
 
   static async getAPharm(req, res) {
     const { id } = req.params;
-
-    if (!Number(id)) {
-      util.setError(400, 'Please input a valid numeric value');
-      return util.send(res);
-    }
 
     try {
       const thePharm = await PharmService.getAPharm(id);
@@ -84,15 +82,10 @@ class PharmController {
   static async deletePharm(req, res) {
     const { id } = req.params;
 
-    if (!Number(id)) {
-      util.setError(400, 'Please provide a numeric value');
-      return util.send(res);
-    }
-
     try {
-      const pharmtoDelete = await PharmService.deletePharm(id);
+      const pharmToDelete = await PharmService.deletePharm(id);
 
-      if (pharmtoDelete) {
+      if (pharmToDelete) {
         util.setSuccess(200, 'Pharmacy deleted');
       } else {
         util.setError(404, `Pharmacy with the id ${id} cannot be found`);

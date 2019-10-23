@@ -21,14 +21,14 @@ export default class PharmService {
     try {
       const pharmToUpdate = await Pharmacie.findOne({
         where: {
-          id: Number(id)
+          id: id
         }
       });
 
       if (pharmToUpdate) {
         await Pharmacie.update(updatePharm, {
           where: {
-            id: Number(id)
+            id: id
           }
         });
       }
@@ -41,7 +41,7 @@ export default class PharmService {
     try {
       const thePharm = await Pharmacie.findOne({
         where: {
-          id: Number(id)
+          id: id
         }
       });
       return thePharm;
@@ -54,16 +54,17 @@ export default class PharmService {
     try {
       const pharmToDelete = await Pharmacie.findOne({
         where: {
-          id: Number(id)
+          id: id
         }
       });
 
       if (pharmToDelete) {
         await Pharmacie.destroy({
           where: {
-            id: Number(id)
+            id: id
           }
         });
+        return pharmToDelete;
       }
     } catch (err) {
       throw err;
