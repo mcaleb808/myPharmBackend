@@ -3,15 +3,15 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Pharmacies', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.UUID,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        defaultValue: Sequelize.UUIDV4
       },
       name: {
         type: Sequelize.STRING
       },
-      location: {
+      insurance: { type: Sequelize.ARRAY(Sequelize.STRING) },
+      logo: {
         type: Sequelize.STRING
       },
       createdAt: {

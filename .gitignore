@@ -2,6 +2,8 @@
 logs
 *.log
 .DS_Store
+DS_Store
+.vscode
 
 npm-debug.log*
 
@@ -55,3 +57,5 @@ combined
 
 # UI Stylesheet
 ui/css/style.css
+node_modules
+node_modules/

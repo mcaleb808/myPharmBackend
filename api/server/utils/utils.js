@@ -17,6 +17,7 @@ export default class Util {
     this.statusCode = statusCode;
     this.message = message;
     this.type = 'error';
+    this.data = 'no data';
   }
 
   send(res) {
