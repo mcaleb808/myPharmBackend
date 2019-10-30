@@ -13,7 +13,6 @@ describe('Testing routes', () => {
         insurance: ['Remera', 'Remera', 'Remera', 'Remera', 'Gikondo']
       });
     pharmSample = res;
-    console.log(pharmSample);
     expect(res.statusCode).toEqual(201);
   });
 
