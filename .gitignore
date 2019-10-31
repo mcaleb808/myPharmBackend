@@ -41,6 +41,9 @@ node_modules
 
 # Pnpm package generator
 shrinkwrap.yaml
+# Coveralls repo token
+
+.coveralls.yml
 
 # NPM and Yarn lock file 
 
@@ -56,3 +59,4 @@ combined
 ui/css/style.css
 node_modules
 node_modules/
+.nyc_output/
