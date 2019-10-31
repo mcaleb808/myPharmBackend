@@ -59,3 +59,4 @@ combined
 ui/css/style.css
 node_modules
 node_modules/
+.nyc_output/
