@@ -25,11 +25,11 @@
 
 > **Provide the steps to manually test the functionalities implemented in this PR**
 
-- After cloning the [repo](https://github.com/Musigwa/PayIt.git), and `cd PayIt`
+- After cloning the [repo](url), and `cd into the project`
 - Check out this branch by `git checkout update-important-dependencies`
-- Run `yarn` to install the project dependencies
-- Make sure to create your `.env` file by `cp .env.sample.js .env` and set the correct values
-- Run `yarn start` to start the server.
+- Run `yarn | npm install` to install the project dependencies
+- Make sure to have your `.env` file set up correctly
+- Run `yarn dev | npm run dev` to start the local server.
 
 #### Checklist:
 
@@ -42,7 +42,7 @@
 
 #### GitHub issue your changes fix 
 
-Resolves #10
+Resolves #issueId
 
 #### Screenshots
 
