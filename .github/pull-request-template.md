@@ -25,8 +25,8 @@
 
 > **Provide the steps to manually test the functionalities implemented in this PR**
 
-- After cloning the [repo](url), and `cd into the project`
-- Check out this branch by `git checkout update-important-dependencies`
+- After cloning the [repo](https://github.com/mcaleb808/myPharmBackend.git), and `cd into the project`
+- Check out this branch by _git checkout `branchName`_
 - Run `yarn | npm install` to install the project dependencies
 - Make sure to have your `.env` file set up correctly
 - Run `yarn dev | npm run dev` to start the local server.
@@ -40,7 +40,7 @@
 - [ ] I have added tests which prove the effectiveness of my work
 - [x] new and existing tests pass locally with my changes
 
-#### GitHub issue your changes fix 
+#### GitHub issue your changes fix
 
 Resolves #issueId
 
