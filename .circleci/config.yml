@@ -21,6 +21,9 @@ jobs:
       - run:
           name: Setup Dependencies
           command: yarn
+      - run:
+          key: setting up env key
+          command: echo "export COVERALLS_TOKEN=$COVERALLS_TOKEN" >> $BASH_ENV
       - run: yarn global add sequelize-cli
       - run: yarn global add pg
       - run:
