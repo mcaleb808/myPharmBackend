@@ -81,7 +81,6 @@ class PharmController {
 
   static async deletePharm(req, res) {
     const { id } = req.params;
-
     try {
       const pharmToDelete = await PharmService.deletePharm(id);
 
