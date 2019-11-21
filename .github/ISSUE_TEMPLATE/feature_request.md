@@ -1,8 +1,8 @@
 ---
 name: Feature request
-about: "✨State your feature request title ✨"
-title: "✨State your feature request title ✨"
-labels: Feature request, enhancement
+about: "✨Create/suggest an enhancement to help us improve✨"
+title: "State your feature request title"
+labels: enhancement
 assignees: ''
 
 ---
@@ -15,7 +15,7 @@ assignees: ''
 
 > A clear and concise description of what you want to happen.
 
-#### :part_alternation_mark: Describe alternatives you've considered :part_alternation_mark:
+#### :part_alternation_mark: Describe alternatives you've considered if any :part_alternation_mark:
 
 > A clear and concise description of any alternative solutions or features you've considered.
 
