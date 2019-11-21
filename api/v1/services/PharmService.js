@@ -1,4 +1,4 @@
-import { Pharmacie } from '../src/models';
+import { Pharmacie } from '../models';
 
 export default class PharmService {
   static async getAllPharms() {
@@ -21,14 +21,14 @@ export default class PharmService {
     try {
       const pharmToUpdate = await Pharmacie.findOne({
         where: {
-          id: id
+          id
         }
       });
 
       if (pharmToUpdate) {
         await Pharmacie.update(updatePharm, {
           where: {
-            id: id
+            id
           }
         });
       }
@@ -41,7 +41,7 @@ export default class PharmService {
     try {
       const thePharm = await Pharmacie.findOne({
         where: {
-          id: id
+          id
         }
       });
       return thePharm;
@@ -54,14 +54,14 @@ export default class PharmService {
     try {
       const pharmToDelete = await Pharmacie.findOne({
         where: {
-          id: id
+          id
         }
       });
 
       if (pharmToDelete) {
         await Pharmacie.destroy({
           where: {
-            id: id
+            id
           }
         });
         return pharmToDelete;

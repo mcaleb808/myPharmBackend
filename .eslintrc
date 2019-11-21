@@ -6,7 +6,7 @@
     "jest": true
   },
   "parser": "babel-eslint",
-  "extends": ["airbnb-base", "plugin:prettier/recommended", "prettier/react"],
+  "extends": ["airbnb-base"],
   "globals": {
     "fetch": false,
     "Atomics": "readonly",
@@ -19,9 +19,9 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["prettier"],
+  "plugins": ["jest", "prettier"],
   "rules": {
-    "no-use-before-define": "off",
+    "no-use-before-define": "error",
     "no-unused-vars": [
       "error",
       {
@@ -32,16 +32,16 @@
     "quotes": "error",
     "eol-last": ["error", "always"],
     "import/prefer-default-export": 2,
-    "one-var": "error",
-    "one-var-declaration-per-line": "error",
-    "new-cap": 0,
-    "consistent-return": "error",
-    "no-param-reassign": 0,
+    "one-var": "off",
+    "one-var-declaration-per-line": "off",
+    "new-cap": "off",
+    "consistent-return": "off",
+    "no-useless-catch": "off",
+    "no-param-reassign": "error",
     "comma-dangle": 0,
     "global-require": "off",
-    "arrow-body-style": ["error", "as-needed"],
-    "import/no-dynamic-require": "error",
-    "prettier/prettier": 0,
+    "arrow-body-style": [0, "as-needed"],
+    "import/no-dynamic-require": 0,
     "no-shadow": ["error", { "hoist": "functions" }],
     "curly": ["error", "multi-line"],
     "import/no-unresolved": [2, { "commonjs": true }]

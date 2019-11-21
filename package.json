@@ -33,15 +33,19 @@
     "@babel/preset-env": "7.6.2",
     "@babel/register": "7.6.2",
     "@babel/runtime": "7.6.2",
+    "babel-eslint": "10.0.3",
     "babel-loader": "8.0.6",
     "coveralls": "3.0.7",
     "cross-env": "6.0.3",
     "eslint": "6.4.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.18.2",
-    "husky": "^3.1.0",
+    "eslint-plugin-jest": "23.0.4",
+    "eslint-plugin-prettier": "3.1.1",
+    "husky": "3.1.0",
     "jest": "24.9.0",
-    "lint-staged": "^9.4.3",
+    "lint-staged": "9.4.3",
+    "prettier": "1.19.1",
     "supertest": "4.0.2"
   },
   "husky": {
@@ -50,7 +54,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": [
+    "*.js": [
       "yarn prettier",
       "git add"
     ]

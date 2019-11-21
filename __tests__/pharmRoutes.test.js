@@ -1,8 +1,6 @@
 import request from 'supertest';
 import app from '../api/index';
 
-let pharmSample = {};
-
 describe('Testing routes', () => {
   it('it should add a new pharmacy', async () => {
     const res = await request(app)
@@ -12,7 +10,6 @@ describe('Testing routes', () => {
         logo: 'test',
         insurance: ['Remera', 'Remera', 'Remera', 'Remera', 'Gikondo']
       });
-    pharmSample = res;
     expect(res.statusCode).toEqual(201);
   });
 
