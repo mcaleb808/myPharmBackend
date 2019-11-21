@@ -1,27 +1,22 @@
 import config from 'dotenv';
 import express from 'express';
-import bodyParser from 'body-parser';
-import PharmRoutes from './server/routes/PharmRoutes';
+import PharmRoutes from './v1/routes/PharmRoutes';
 
 config.config();
 const app = express();
+const { PORT = 8000 } = process.env;
 
-app.use(bodyParser.json());
-
-app.use(bodyParser.urlencoded({ extended: false }));
-
-const port = process.env.PORT || 8000;
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/v1/Pharmacies', PharmRoutes);
 
-app.get('*', (req, res) =>
-  res.status(200).send({
-    message: 'Welcome to EasyPharm API'
-  })
-);
+app.get('*', (req, res) => res.status(200).send({
+  message: 'Welcome to EasyPharm API'
+}));
 
-app.listen(port, () => {
-  console.log(`Server  double check is running on PORT ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server  double check is running on PORT ${PORT}`);
 });
 
 export default app;

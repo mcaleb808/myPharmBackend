@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Pharmacie = sequelize.define(
     'Pharmacie',
@@ -16,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  Pharmacie.associate = function(models) {
+  Pharmacie.associate = (_models) => {
     // associations can be defined here
   };
   return Pharmacie;

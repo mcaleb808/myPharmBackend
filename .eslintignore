@@ -1,4 +1,5 @@
-api/server/src/config/
 api/server/src/migrations/
 api/server/src/seeders/
 /api/server/src/models/
+build
+coverage
