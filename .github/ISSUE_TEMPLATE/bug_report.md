@@ -4,10 +4,7 @@ about: "\U0001F41ECreate a report to help us improve \U0001F41E"
 title: "\U0001F41ECreate a report to help us improve \U0001F41E"
 labels: bug, help wanted, invalid
 assignees: ''
-
----
-
-### 🐞Describe the bug🐞
+---### 🐞Describe the bug/issue🐞
 
 > A clear and concise description of what the bug is.
 
