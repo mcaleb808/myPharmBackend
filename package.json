@@ -7,46 +7,37 @@
     "dev": "nodemon --exec babel-node ./api/index.js",
     "migrate": "npx sequelize-cli db:migrate",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
-    "test": "cross-env NODE_ENV=test jest   --coverage --testTimeout=10000 --forceExit",
     "pretest": "cross-env NODE_ENV=test npm run migrate:reset",
+    "test": "cross-env NODE_ENV=test jest   --coverage --testTimeout=10000 --detectOpenHandles --forceExit",
+    "prettier": "eslint --ignore-path ./.eslintignore . --fix",
     "build": "rm -rf ./build && babel -d ./build ./api -s",
-    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
-    "coveralls-coverage": "coveralls < lcov.info",
-    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/"
-    ]
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "author": "Caleb Mugisha",
+  "contributors": ["Musigwa Pacifique"],
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "dotenv": "^8.1.0",
-    "express": "^4.17.1",
-    "jest": "^24.9.0",
-    "nyc": "^14.1.1",
-    "path": "^0.12.7",
-    "pg": "^7.12.1",
-    "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.1",
-    "supertest": "^4.0.2"
+    "dotenv": "8.1.0",
+    "express": "4.17.1",
+    "pg": "7.12.1",
+    "pg-hstore": "2.3.3",
+    "sequelize": "5.21.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.2",
-    "@babel/core": "^7.6.2",
-    "@babel/node": "^7.6.2",
-    "@babel/plugin-transform-runtime": "^7.6.2",
-    "@babel/preset-env": "^7.6.2",
-    "@babel/register": "^7.6.2",
-    "@babel/runtime": "^7.6.2",
-    "babel-loader": "^8.0.6",
-    "coveralls": "^3.0.7",
-    "cross-env": "^6.0.3",
-    "eslint": "^6.4.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "supertest": "4.0.2",
+    "jest": "24.9.0",
+    "@babel/cli": "7.6.2",
+    "@babel/core": "7.6.2",
+    "@babel/node": "7.6.2",
+    "@babel/plugin-transform-runtime": "7.6.2",
+    "@babel/preset-env": "7.6.2",
+    "@babel/register": "7.6.2",
+    "@babel/runtime": "7.6.2",
+    "babel-loader": "8.0.6",
+    "coveralls": "3.0.7",
+    "cross-env": "6.0.3",
+    "eslint": "6.4.0",
+    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-plugin-import": "2.18.2"
   }
 }

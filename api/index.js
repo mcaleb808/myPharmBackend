@@ -1,16 +1,13 @@
 import config from 'dotenv';
 import express from 'express';
-import bodyParser from 'body-parser';
 import PharmRoutes from './server/routes/PharmRoutes';
 
 config.config();
 const app = express();
+const { PORT = 8000 } = process.env;
 
-app.use(bodyParser.json());
-
-app.use(bodyParser.urlencoded({ extended: false }));
-
-const port = process.env.PORT || 8000;
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/v1/Pharmacies', PharmRoutes);
 
@@ -20,8 +17,8 @@ app.get('*', (req, res) =>
   })
 );
 
-app.listen(port, () => {
-  console.log(`Server  double check is running on PORT ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server  double check is running on PORT ${PORT}`);
 });
 
 export default app;
