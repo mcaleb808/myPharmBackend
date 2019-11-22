@@ -1,0 +1,49 @@
+name: Test suites
+on:
+  push:
+    branches:
+      - '**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: pharmtest
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Restore/Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-${{ env.cache-name }}-
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+      - name: Install project dependencies
+        run: npm install
+      - name: Install sequelize cli globally
+        run: npm install -g sequelize-cli
+      - name: Run the database migrations
+        run: sequelize db:migrate
+        env:
+          NODE_ENV: test
+          TEST_DATABASE_URL: postgres://postgres@localhost:${{ job.services.postgres.ports[5432] }}/pharmtest
+      - name: Run the test suites
+        run: npm test
+        env:
+          NODE_ENV: test
+          TEST_DATABASE_URL: postgres://postgres@localhost:${{ job.services.postgres.ports[5432] }}/pharmtest
