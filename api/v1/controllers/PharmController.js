@@ -1,7 +1,5 @@
 import PharmService from '../services/PharmService';
-import Util from '../utils/utils';
-
-const util = new Util();
+import util from '../utils/utils';
 
 class PharmController {
   static async getAllPharms(req, res) {
@@ -10,7 +8,7 @@ class PharmController {
       if (allPharms.length > 0) {
         util.setSuccess(200, 'Pharmacies retrieved', allPharms);
       } else {
-        util.setSuccess(200, 'No pharmacy found');
+        util.setSuccess(404, 'No pharmacy found');
       }
       return util.send(res);
     } catch (err) {
@@ -33,7 +31,10 @@ class PharmController {
       const createPharm = await PharmService.addPharm({
         name: newPharm.name,
         logo: newPharm.logo,
-        insurance: insurances
+        email: newPharm.email,
+        telephone: newPharm.telephone,
+        insurance: insurances,
+        pharmRep: newPharm.pharmRep
       });
       util.setSuccess(201, 'Pharm Added', createPharm);
       return util.send(res);

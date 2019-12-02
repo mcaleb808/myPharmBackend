@@ -44,6 +44,7 @@
     "import/no-dynamic-require": 0,
     "no-shadow": ["error", { "hoist": "functions" }],
     "curly": ["error", "multi-line"],
-    "import/no-unresolved": [2, { "commonjs": true }]
+    "import/no-unresolved": [2, { "commonjs": true }],
+    "arrow-parens": 0
   }
 }
