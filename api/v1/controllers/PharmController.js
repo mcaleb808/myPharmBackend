@@ -8,7 +8,7 @@ class PharmController {
       if (allPharms.length > 0) {
         util.setSuccess(200, 'Pharmacies retrieved', allPharms);
       } else {
-        util.setSuccess(404, 'No pharmacy found');
+        util.setError(404, 'No pharmacy found');
       }
       return util.send(res);
     } catch (err) {
@@ -18,11 +18,6 @@ class PharmController {
   }
 
   static async addPharm(req, res) {
-    if (!req.body.name || !req.body.logo) {
-      util.setError(400, 'Please provide complete details');
-      return util.send(res);
-    }
-
     const newPharm = req.body;
 
     const insurances = [...new Set(newPharm.insurance)];
@@ -50,7 +45,7 @@ class PharmController {
 
     try {
       const updatePharm = await PharmService.updatePharm(id, updatedPharm);
-      if (!updatedPharm) {
+      if (!updatePharm) {
         util.setError(404, `Cannot find a Pharmacy with the id ${id}`);
       } else {
         util.setSuccess(200, 'Pharmacy updated', updatePharm);
