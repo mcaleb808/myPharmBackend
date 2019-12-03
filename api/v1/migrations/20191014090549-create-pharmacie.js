@@ -14,7 +14,7 @@ module.exports = {
           msg: 'Must provide the name of this Pharmacy'
         }
       },
-      insurance: {
+      insurances: {
         type: Sequelize.ARRAY(Sequelize.STRING),
         defaultValue: []
       },

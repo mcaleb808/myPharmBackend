@@ -20,7 +20,7 @@ class PharmController {
   static async addPharm(req, res) {
     const newPharm = req.body;
 
-    const insurances = [...new Set(newPharm.insurance)];
+    const insurances = [...new Set(newPharm.insurances)];
 
     try {
       const createPharm = await PharmService.addPharm({
@@ -28,7 +28,7 @@ class PharmController {
         logo: newPharm.logo,
         email: newPharm.email,
         telephone: newPharm.telephone,
-        insurance: insurances,
+        insurances,
         pharmRep: newPharm.pharmRep
       });
       util.setSuccess(201, 'Pharm Added', createPharm);

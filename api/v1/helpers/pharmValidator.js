@@ -10,7 +10,7 @@ export default class pharmValidator {
         .trim()
         .pattern(/^[a-zA-Z]+$/),
       logo: Joi.any(),
-      insurance: Joi.array(),
+      insurances: Joi.array(),
       email: Joi.string()
         .email()
         .required()

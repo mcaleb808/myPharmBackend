@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Must provide the name of this Pharmacy'
         }
       },
-      insurance: {
+      insurances: {
         type: DataTypes.ARRAY(DataTypes.STRING),
         defaultValue: []
       },
