@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/v1/pharmacies', PharmRoutes);
 
-app.get('*', (_req, res) => {
+app.get('/', (_req, res) => {
   res.status(200).send({
     message: 'Welcome to EasyPharm API'
   });
