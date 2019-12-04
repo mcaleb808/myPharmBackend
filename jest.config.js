@@ -8,7 +8,8 @@ module.exports = {
     'api/**/*.js',
     '!**/coverage/**',
     '!**/node_modules/**',
-    '!**/jest.config.js'
+    '!**/jest.config.js',
+    '!**/api/v1/migrations/**'
   ],
   coverageThreshold: {
     global: {
@@ -17,5 +18,5 @@ module.exports = {
       lines: 80,
       statements: 80
     }
-  },
+  }
 };

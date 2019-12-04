@@ -8,7 +8,7 @@
     "migrate": "npx sequelize-cli db:migrate",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
     "pretest": "cross-env NODE_ENV=test npm run migrate:reset",
-    "test": "cross-env NODE_ENV=test jest   --coverage --testTimeout=10000 --detectOpenHandles --forceExit",
+    "test": "cross-env NODE_ENV=test jest   --coverage --testTimeout=10000 --watchAll --forceExit",
     "prettier": "eslint --ignore-path ./.eslintignore . --fix",
     "build": "rm -rf ./build && babel -d ./build ./api -s",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
@@ -19,6 +19,7 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "16.1.8",
     "dotenv": "8.1.0",
     "express": "4.17.1",
     "pg": "7.12.1",

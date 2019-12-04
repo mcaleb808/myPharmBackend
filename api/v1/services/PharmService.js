@@ -24,7 +24,6 @@ export default class PharmService {
           id
         }
       });
-
       if (pharmToUpdate) {
         await Pharmacie.update(updatePharm, {
           where: {
@@ -32,6 +31,7 @@ export default class PharmService {
           }
         });
       }
+      return pharmToUpdate;
     } catch (err) {
       throw err;
     }

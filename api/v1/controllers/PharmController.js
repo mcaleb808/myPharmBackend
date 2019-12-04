@@ -1,7 +1,5 @@
 import PharmService from '../services/PharmService';
-import Util from '../utils/utils';
-
-const util = new Util();
+import util from '../utils/utils';
 
 class PharmController {
   static async getAllPharms(req, res) {
@@ -10,7 +8,7 @@ class PharmController {
       if (allPharms.length > 0) {
         util.setSuccess(200, 'Pharmacies retrieved', allPharms);
       } else {
-        util.setSuccess(200, 'No pharmacy found');
+        util.setError(404, 'No pharmacy found');
       }
       return util.send(res);
     } catch (err) {
@@ -20,20 +18,18 @@ class PharmController {
   }
 
   static async addPharm(req, res) {
-    if (!req.body.name || !req.body.logo) {
-      util.setError(400, 'Please provide complete details');
-      return util.send(res);
-    }
-
     const newPharm = req.body;
 
-    const insurances = [...new Set(newPharm.insurance)];
+    const insurances = [...new Set(newPharm.insurances)];
 
     try {
       const createPharm = await PharmService.addPharm({
         name: newPharm.name,
         logo: newPharm.logo,
-        insurance: insurances
+        email: newPharm.email,
+        telephone: newPharm.telephone,
+        insurances,
+        pharmRep: newPharm.pharmRep
       });
       util.setSuccess(201, 'Pharm Added', createPharm);
       return util.send(res);
@@ -49,7 +45,7 @@ class PharmController {
 
     try {
       const updatePharm = await PharmService.updatePharm(id, updatedPharm);
-      if (!updatedPharm) {
+      if (!updatePharm) {
         util.setError(404, `Cannot find a Pharmacy with the id ${id}`);
       } else {
         util.setSuccess(200, 'Pharmacy updated', updatePharm);

@@ -1,4 +1,4 @@
-export default class Util {
+class Util {
   constructor() {
     this.statusCode = null;
     this.type = null;
@@ -33,3 +33,5 @@ export default class Util {
     return res.status(this.statusCode).json(result);
   }
 }
+
+export default new Util();
