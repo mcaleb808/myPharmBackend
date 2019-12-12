@@ -17,8 +17,7 @@ app.get('/', (_req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server  double check is running on PORT ${PORT}`);
-});
+// eslint-disable-next-line no-console
+const server = app.listen(PORT, () => console.log(`The server is running on PORT ${PORT}`));
 
-export default app;
+export default server;
