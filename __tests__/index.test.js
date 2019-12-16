@@ -1,0 +1,15 @@
+import request from 'supertest';
+import server from '../api/index';
+
+describe('root tests', () => {
+  let app;
+  beforeEach(() => {
+    app = server;
+  });
+
+  afterEach(() => app.closer);
+  it('test root endpoint', async () => {
+    const res = await request(app).get('/');
+    expect(res.body.message).toBe('Welcome to EasyPharm API');
+  });
+});

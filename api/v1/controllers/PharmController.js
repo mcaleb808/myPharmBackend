@@ -1,20 +1,16 @@
 import PharmService from '../services/PharmService';
 import util from '../utils/utils';
+import getAllHelper from '../helpers/getAllHelper';
 
 class PharmController {
-  static async getAllPharms(req, res) {
-    try {
-      const allPharms = await PharmService.getAllPharms();
-      if (allPharms.length > 0) {
-        util.setSuccess(200, 'Pharmacies retrieved', allPharms);
-      } else {
-        util.setError(404, 'No pharmacy found');
-      }
-      return util.send(res);
-    } catch (err) {
-      util.setError(400, err);
-      return util.send(res);
-    }
+  static async getAllPharms(_req, res) {
+    const query = PharmService.getAllPharms();
+    getAllHelper(query, res, util, 'Pharmacies retrieved', 'No pharmacy found');
+  }
+
+  static async getAllRequests(_req, res) {
+    const query = PharmService.getAllRequests();
+    getAllHelper(query, res, util, 'Requests retrieved', 'No request found');
   }
 
   static async addPharm(req, res) {
