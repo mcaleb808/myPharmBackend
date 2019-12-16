@@ -5,9 +5,10 @@ describe('root tests', () => {
   let app;
   beforeEach(() => {
     app = server;
+    return app.close();
   });
 
-  afterEach(() => app.closer);
+  afterEach(() => app.close());
   it('test root endpoint', async () => {
     const res = await request(app).get('/');
     expect(res.body.message).toBe('Welcome to EasyPharm API');
