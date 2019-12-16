@@ -7,6 +7,7 @@ describe('', () => {
     app = server;
     return app.close();
   });
+
   afterEach(() => app.close());
   describe('Testing pharmacie routes', () => {
     let pharmId = '';
