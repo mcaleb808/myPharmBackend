@@ -5,7 +5,9 @@ describe('', () => {
   let app;
   beforeEach(() => {
     app = server;
+    return app.close();
   });
+
   afterEach(() => app.close());
   describe('Testing pharmacie routes', () => {
     let pharmId = '';
@@ -76,6 +78,12 @@ describe('', () => {
       const res = await request(app).get('/api/v1/pharmacies');
       expect(res.statusCode).toEqual(200);
       expect(res.body.message).toEqual('Pharmacies retrieved');
+    });
+
+    it('it should fetch requests', async () => {
+      const res = await request(app).get('/api/v1/requests');
+      expect(res.statusCode).toEqual(200);
+      expect(res.body.message).toEqual('Requests retrieved');
     });
 
     it('it should get one pharmacy', async () => {

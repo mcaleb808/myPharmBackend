@@ -9,6 +9,14 @@ export default class PharmService {
     }
   }
 
+  static async getAllRequests() {
+    try {
+      return await Pharmacie.findAll({ where: { status: 'request' } });
+    } catch (err) {
+      throw err;
+    }
+  }
+
   static async addPharm(newPharm) {
     try {
       return await Pharmacie.create(newPharm);
