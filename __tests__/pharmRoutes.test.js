@@ -3,12 +3,12 @@ import server from '../api';
 
 describe('', () => {
   let app;
-  beforeEach(() => {
+  beforeAll(() => {
     app = server;
     return app.close();
   });
 
-  afterEach(() => app.close());
+  afterAll(() => app.close());
   describe('Testing pharmacie routes', () => {
     let pharmId = '';
     const fakeId = '11772db9-7ff2-4d92-a1ef-75f0f1410deb';
@@ -101,6 +101,15 @@ describe('', () => {
       expect(res.body.data.email).toBeDefined();
     });
 
+    it('it should Reject a request', async () => {
+      const res = await request(app)
+        .put(`/api/v1/requests/${pharmId}`)
+        .send({
+          status: 'rejected'
+        });
+      expect(res.statusCode).toEqual(200);
+      expect(res.body.data.email).toBeDefined();
+    });
     it('it should delete one pharmacy', async () => {
       const res = await request(app).delete(`/api/v1/pharmacies/${pharmId}`);
       expect(res.statusCode).toEqual(200);

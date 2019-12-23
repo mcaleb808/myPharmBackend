@@ -1,6 +1,7 @@
 import PharmService from '../services/PharmService';
 import util from '../utils/utils';
 import getAllHelper from '../helpers/getAllHelper';
+import updateHelper from '../helpers/updateHelper';
 
 class PharmController {
   static async getAllPharms(_req, res) {
@@ -38,19 +39,19 @@ class PharmController {
   static async updatePharm(req, res) {
     const updatedPharm = req.body;
     const { id } = req.params;
+    const error = `Cannot find a Pharmacy with the id ${id}`;
+    const message = 'Pharmacy updated';
 
-    try {
-      const updatePharm = await PharmService.updatePharm(id, updatedPharm);
-      if (!updatePharm) {
-        util.setError(404, `Cannot find a Pharmacy with the id ${id}`);
-      } else {
-        util.setSuccess(200, 'Pharmacy updated', updatePharm);
-      }
-      return util.send(res);
-    } catch (err) {
-      util.setError(404, err);
-      return util.send(res);
-    }
+    await updateHelper(id, res, updatedPharm, PharmService, util, message, error);
+  }
+
+  static async rejectRequest(req, res) {
+    const status = 'rejected';
+    const { id } = req.params;
+    const error = `Cannot find a Request with the id ${id}`;
+    const message = 'Request rejected';
+
+    await updateHelper(id, res, { status }, PharmService, util, message, error);
   }
 
   static async getAPharm(req, res) {
