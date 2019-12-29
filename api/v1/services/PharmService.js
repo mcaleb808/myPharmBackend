@@ -33,7 +33,7 @@ export default class PharmService {
         }
       });
       if (pharmToUpdate) {
-        await Pharmacie.update(updatePharm, {
+        await pharmToUpdate.update(updatePharm, {
           where: {
             id
           }
