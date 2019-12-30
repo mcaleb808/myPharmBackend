@@ -39,11 +39,16 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       status: {
-        type: DataTypes.STRING,
-        defaultValue: 'request'
+        type: DataTypes.ENUM,
+        values: ['pending', 'rejected', 'approved'],
+        defaultValue: 'pending'
       }
     },
-    {}
+    {
+      tableName: 'pharmacies',
+      timestamps: true,
+      paranoid: true,
+    }
   );
   Pharmacy.associate = _models => {
     // associations can be defined here

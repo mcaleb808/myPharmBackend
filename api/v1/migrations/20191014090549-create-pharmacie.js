@@ -1,7 +1,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('Pharmacies', {
+    queryInterface.createTable('pharmacies', {
       id: {
         type: Sequelize.UUID,
         primaryKey: true,
@@ -30,8 +30,9 @@ module.exports = {
         allowNull: false
       },
       status: {
-        type: Sequelize.STRING,
-        defaultValue: 'request'
+        type: Sequelize.ENUM,
+        values: ['pending', 'rejected', 'approved'],
+        defaultValue: 'pending'
       },
       createdAt: {
         allowNull: false,
@@ -40,7 +41,8 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      deletedAt: { type: Sequelize.DATE }
     }),
-  down: (queryInterface, _Sequelize) => queryInterface.dropTable('Pharmacies')
+  down: (queryInterface, _Sequelize) => queryInterface.dropTable('pharmacies')
 };

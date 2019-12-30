@@ -8,6 +8,7 @@ const getAllHelper = async (query, res, util, message, error) => {
     }
     return util.send(res);
   } catch (err) {
+    console.log('this should be an error:', err);
     util.setError(400, err);
     return util.send(res);
   }

@@ -4,10 +4,13 @@ import PharmValidators from '../middleware/pharmValidators';
 
 const router = Router();
 
-router.get('/', PharmController.getAllPharms);
-router.route('/').post(PharmValidators.request, PharmController.addPharm);
-router.get('/:id', PharmController.getAPharm);
-router.put('/:id', PharmController.updatePharm);
-router.delete('/:id', PharmController.deletePharm);
+router.route('/')
+  .get(PharmController.getAllPharms)
+  .post(PharmValidators.request, PharmController.addPharm);
+
+router.route('/:id')
+  .get(PharmController.getAPharm)
+  .put(PharmController.updatePharm)
+  .delete(PharmController.deletePharm);
 
 export default router;
