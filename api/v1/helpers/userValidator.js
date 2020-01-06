@@ -34,7 +34,8 @@ export default class UserValidator {
         .trim(),
       password: Joi.string()
         .min(6)
-        .trim()
+        .trim(),
+      role: Joi.string().trim()
     });
     return schema.validate(user, { abortEarly: false });
   }

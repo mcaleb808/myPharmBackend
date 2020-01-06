@@ -10,7 +10,7 @@ router
   .post(
     '/',
     tokenValidator,
-    grantAccess('readOwn', 'pharm'),
+    grantAccess('updateAny', 'pharm'),
     UserValidator.signup,
     UserController.signup
   )

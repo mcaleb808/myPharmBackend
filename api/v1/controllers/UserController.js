@@ -36,7 +36,7 @@ class UserController {
     try {
       const checkUser = await User.findOne({ where: { email } });
       if (!checkUser) {
-        util.setError(401, "'incorrect email or password'");
+        util.setError(401, 'incorrect email or password');
         return util.send(res);
       }
       if (!(await bcrypt.compare(password.trim(), checkUser.password, checkUser.salt))) {

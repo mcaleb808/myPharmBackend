@@ -8,7 +8,7 @@ const roles = (() => {
     .updateOwn('pharm');
 
   ac.grant('admin')
-    .readAny('check')
+    .readAny('pharm')
     .updateAny('pharm')
     .deleteAny('pharm');
 
