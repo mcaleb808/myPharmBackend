@@ -9,10 +9,7 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: {
-          args: false,
-          msg: 'Must provide the name of this Pharmacy'
-        }
+        allowNull: null
       },
       insurances: {
         type: Sequelize.ARRAY(Sequelize.STRING),

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Pharmacie = sequelize.define(
-    'Pharmacie',
+  const Pharmacy = sequelize.define(
+    'Pharmacy',
     {
       id: {
         type: DataTypes.UUID,
@@ -45,8 +45,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  Pharmacie.associate = _models => {
+  Pharmacy.associate = _models => {
     // associations can be defined here
   };
-  return Pharmacie;
+  return Pharmacy;
 };
