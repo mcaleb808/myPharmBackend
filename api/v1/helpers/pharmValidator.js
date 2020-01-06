@@ -1,6 +1,6 @@
 import Joi from '@hapi/joi';
 
-export default class pharmValidator {
+export default class PharmValidator {
   static request(pharm) {
     const schema = Joi.object().keys({
       name: Joi.string()

@@ -4,7 +4,7 @@ import { User } from '../models';
 import util from '../utils/utils';
 import tokenHandler from '../helpers/tokenHandler';
 
-class AuthController {
+class UserController {
   static async signup(req, res) {
     const { firstName, lastName, email, password } = req.body;
     const userId = uuidv4();
@@ -54,4 +54,4 @@ class AuthController {
   }
 }
 
-export default AuthController;
+export default UserController;

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import PharmController from '../controllers/PharmController';
-import authController from '../controllers/AuthController';
+import authController from '../controllers/UserController';
 
 const router = Router();
 
