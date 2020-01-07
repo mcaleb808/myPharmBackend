@@ -22,10 +22,6 @@ class UserController {
       util.setSuccess(201, 'admin created successfully', { token, admin: newAdmin });
       return util.send(res);
     } catch (err) {
-      if (err.message.startsWith('duplicate key')) {
-        util.setError(409, 'email already taken');
-        return util.send(res);
-      }
       util.setError(500, err.message);
       return util.send(res);
     }
