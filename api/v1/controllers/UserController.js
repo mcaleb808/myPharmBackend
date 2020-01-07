@@ -5,6 +5,13 @@ import util from '../utils/utils';
 import tokenHandler from '../helpers/tokenHandler';
 
 class UserController {
+  /**
+   * @author Caleb
+   * @param {*} req
+   * @param {*} res
+   * @returns returns response
+   * @memberof UserController
+   */
   static async signup(req, res) {
     const { firstName, lastName, email, password } = req.body;
     const userId = uuidv4();
@@ -27,6 +34,13 @@ class UserController {
     }
   }
 
+  /**
+   * @author Caleb
+   * @param {*} req
+   * @param {*} res
+   * @returns returns response
+   * @memberof UserController
+   */
   static async login(req, res) {
     const { email, password } = req.body;
     try {
