@@ -14,7 +14,7 @@ export default async (req, res, next) => {
   const decoded = jwt.verify(token, process.env.SECRET_KEY);
   const query = await User.findOne({ where: { id: decoded.userId } });
   if (!query) {
-    util.setError(403, 'the user who belong to this token does not exist.');
+    util.setError(401, 'Invalid credentials provided');
     return util.send(res);
   }
   req.user = query;

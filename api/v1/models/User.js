@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: { args: true, msg: 'Email address already in use!' }
       },
       password: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
       },
       role: {
@@ -39,8 +39,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
+      tableName: 'users',
+      defaultScope: {
+        attributes: { exclude: ['deletedAt'] }
+      },
+      timestamps: true,
+      paranoid: true,
       hooks: {
-        beforeCreate: user => {
+        beforeSave: user => {
           const salt = bcrypt.genSaltSync();
           user.password = bcrypt.hashSync(user.password, salt);
         }

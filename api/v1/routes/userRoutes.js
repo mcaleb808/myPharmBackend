@@ -13,7 +13,7 @@ router
     async(checkAuth),
     async(grantAccess('updateAny', 'pharm')),
     UserValidator.signup,
-    UserController.signup
+    UserController.signup,
   )
   .post('/login', UserValidator.login, UserController.login);
 

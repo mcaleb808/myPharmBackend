@@ -14,8 +14,8 @@ export default (handler) => async (req, res, next) => {
       ([error] = err.details);
       error.status = 400;
     }
-    if (err.message.includes('jwt malformed')) {
-      return res.status(400).json({ message: 'your token is invalid.' });
+    if (err.name && err.name.includes('JsonWebTokenError')) {
+      return res.status(401).json({ message: 'Invalid credentials provided' });
     }
     return res.status(error.status).json({ message: error.message, ...error });
   }

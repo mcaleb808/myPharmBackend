@@ -1,4 +1,3 @@
-import uuidv4 from 'uuid/v4';
 import bcrypt from 'bcrypt';
 import { User } from '../models';
 import util from '../utils/utils';
@@ -14,10 +13,8 @@ class UserController {
    */
   static async signup(req, res) {
     const { firstName, lastName, email, password } = req.body;
-    const userId = uuidv4();
     try {
       const newAdmin = await User.create({
-        id: userId,
         firstName,
         lastName,
         email,
@@ -54,7 +51,6 @@ class UserController {
         return util.send(res);
       }
       const token = tokenHandler(checkUser);
-      checkUser.password = undefined;
       util.setSuccess(200, 'Admin successfully logged in', { token, user: checkUser });
       return util.send(res);
     } catch (err) {
