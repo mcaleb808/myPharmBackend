@@ -9,7 +9,7 @@ describe('', () => {
   });
 
   afterAll(() => app.close());
-  describe('Testing pharmacie routes', () => {
+  describe('Testing pharmacy routes', () => {
     let pharmId = '';
     const fakeId = '11772db9-7ff2-4d92-a1ef-75f0f1410deb';
 

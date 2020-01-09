@@ -15,35 +15,30 @@ describe('User routes tests', () => {
 
   afterAll(() => app.close());
 
-  it('it should logged in the user', async () => {
+  it('it should successfully log in the user', async () => {
     newAdmin = await User.create({ ...user });
     const res = await request(app)
       .post('/api/v1/users/login')
       .send({ email: user.email, password: user.password });
 
-    expect(res.body.message).toBe('Admin successfully logged in');
+    expect(res.body.message).toMatch(/Admin logged/);
     expect(res.statusCode).toBe(200);
   });
 
-  it('it should fail to log in a user', async () => {
-    const res = await request(app)
+  it('it should return 401 if they provided invalid credentials', async () => {
+    const res1 = await request(app)
       .post('/api/v1/users/login')
       .send({ email: user.email, password: 'testPassword' });
-
-    expect(res.body.message).toBe('incorrect email or password');
-    expect(res.statusCode).toBe(401);
-  });
-
-  it('it should fail to log in a user', async () => {
-    const res = await request(app)
+    const res2 = await request(app)
       .post('/api/v1/users/login')
       .send({ email: 'mugisah@test.org', password: 'testPassword' });
-
-    expect(res.body.message).toBe('incorrect email or password');
-    expect(res.statusCode).toBe(401);
+    expect(res1.statusCode).toEqual(res2.statusCode);
+    expect(res1.body.message).toEqual(res2.body.message);
+    expect(res1.body.message).toBe('incorrect email or password');
+    expect(res1.statusCode).toBe(401);
   });
 
-  it('it should fail to log in a user', async () => {
+  it('it should 404 if the user provided an incorrect email', async () => {
     const res = await request(app)
       .post('/api/v1/users/login')
       .send({ email: 'mug', password: 'testPassword' });
@@ -62,7 +57,7 @@ describe('User routes tests', () => {
     expect(res.statusCode).toBe(201);
   });
 
-  it('it should fail to create an admin', async () => {
+  it('it should fail to create an admin if they use an already used email', async () => {
     token = await tokenHandler(newAdmin);
     const res = await request(app)
       .post('/api/v1/users')
@@ -73,18 +68,18 @@ describe('User routes tests', () => {
     expect(res.statusCode).toBe(500);
   });
 
-  it('it should fail to create an admin', async () => {
+  it('it should fail to create an admin if they provided an invalid email', async () => {
     token = await tokenHandler(newAdmin);
     const res = await request(app)
       .post('/api/v1/users')
       .set('token', token)
       .send({ ...user, email: 'caleb ' });
 
-    expect(res.body.message).toBe('email must be a valid email');
+    expect(res.body.message).toMatch(/must be a valid email/);
     expect(res.statusCode).toBe(404);
   });
 
-  it('it should fail to create an admin', async () => {
+  it("it should fail to create an admin if they don't have permissions", async () => {
     await newAdmin.update({ role: 'pharmacist' });
     token = await tokenHandler(newAdmin);
     user.role = 'pharmacist';
@@ -92,7 +87,7 @@ describe('User routes tests', () => {
       .post('/api/v1/users')
       .set('token', token)
       .send({ ...user });
-    expect(res.body.message).toBe("You don't have enough permission to perform this action");
+    expect(res.body.message).toMatch(/You don't have enough permission/);
     expect(res.statusCode).toBe(401);
   });
 
