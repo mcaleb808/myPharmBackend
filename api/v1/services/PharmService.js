@@ -1,9 +1,9 @@
-import { Pharmacie } from '../models';
+import { Pharmacy } from '../models';
 
 export default class PharmService {
   static async getAllPharms() {
     try {
-      return await Pharmacie.findAll();
+      return await Pharmacy.findAll();
     } catch (err) {
       throw err;
     }
@@ -11,7 +11,7 @@ export default class PharmService {
 
   static async getAllRequests() {
     try {
-      return await Pharmacie.findAll({ where: { status: 'request' } });
+      return await Pharmacy.findAll({ where: { status: 'request' } });
     } catch (err) {
       throw err;
     }
@@ -19,7 +19,7 @@ export default class PharmService {
 
   static async addPharm(newPharm) {
     try {
-      return await Pharmacie.create(newPharm);
+      return await Pharmacy.create(newPharm);
     } catch (err) {
       throw err;
     }
@@ -27,7 +27,7 @@ export default class PharmService {
 
   static async updatePharm(id, updatePharm) {
     try {
-      const pharmToUpdate = await Pharmacie.findOne({
+      const pharmToUpdate = await Pharmacy.findOne({
         where: {
           id
         }
@@ -47,7 +47,7 @@ export default class PharmService {
 
   static async getAPharm(id) {
     try {
-      const thePharm = await Pharmacie.findOne({
+      const thePharm = await Pharmacy.findOne({
         where: {
           id
         }
@@ -60,14 +60,14 @@ export default class PharmService {
 
   static async deletePharm(id) {
     try {
-      const pharmToDelete = await Pharmacie.findOne({
+      const pharmToDelete = await Pharmacy.findOne({
         where: {
           id
         }
       });
 
       if (pharmToDelete) {
-        await Pharmacie.destroy({
+        await Pharmacy.destroy({
           where: {
             id
           }

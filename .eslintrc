@@ -37,7 +37,7 @@
     "new-cap": "off",
     "consistent-return": "off",
     "no-useless-catch": "off",
-    "no-param-reassign": "error",
+    "no-param-reassign": 0,
     "comma-dangle": 0,
     "global-require": "off",
     "arrow-body-style": [0, "as-needed"],
@@ -45,6 +45,7 @@
     "no-shadow": ["error", { "hoist": "functions" }],
     "curly": ["error", "multi-line"],
     "import/no-unresolved": [2, { "commonjs": true }],
-    "arrow-parens": 0
+    "arrow-parens": 0,
+    "object-curly-newline": 0
   }
 }
