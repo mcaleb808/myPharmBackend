@@ -21,7 +21,7 @@ describe('User routes tests', () => {
       .post('/api/v1/users/login')
       .send({ email: user.email, password: user.password });
 
-    expect(res.body.message).toMatch(/Admin logged/);
+    expect(res.body.message).toMatch(/successfully logged/);
     expect(res.statusCode).toBe(200);
   });
 
