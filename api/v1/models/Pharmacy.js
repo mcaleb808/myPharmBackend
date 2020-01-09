@@ -46,8 +46,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       tableName: 'pharmacies',
+      defaultScope: {
+        attributes: { exclude: ['deletedAt'] }
+      },
       timestamps: true,
       paranoid: true,
+      scopes: {
+        pending: {
+          where: { status: 'pending' },
+          returning: true,
+          validate: true,
+          paranoid: true,
+        },
+      }
     }
   );
   Pharmacy.associate = _models => {

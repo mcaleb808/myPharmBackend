@@ -11,7 +11,7 @@ export default class PharmService {
 
   static async getAllRequests() {
     try {
-      return await Pharmacy.findAll({ where: { status: 'request' } });
+      return await Pharmacy.findAll({ where: { status: 'pending' } });
     } catch (err) {
       throw err;
     }

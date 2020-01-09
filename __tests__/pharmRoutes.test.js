@@ -82,6 +82,7 @@ describe('', () => {
 
     it('it should fetch requests', async () => {
       const res = await request(app).get('/api/v1/requests');
+      console.log('This=====================', res.body);
       expect(res.statusCode).toEqual(200);
       expect(res.body.message).toEqual('Requests retrieved');
     });

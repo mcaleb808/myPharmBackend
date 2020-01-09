@@ -1,16 +1,17 @@
 import { Router } from 'express';
 import PharmController from '../controllers/PharmController';
 import PharmValidators from '../middleware/pharmValidators';
+import async from '../middleware/async';
 
 const router = Router();
 
 router.route('/')
-  .get(PharmController.getAllPharms)
-  .post(PharmValidators.request, PharmController.addPharm);
+  .get(async(PharmController.getAllPharms))
+  .post(async(PharmValidators.request), PharmController.addPharm);
 
 router.route('/:id')
-  .get(PharmController.getAPharm)
-  .put(PharmController.updatePharm)
-  .delete(PharmController.deletePharm);
+  .get(async(PharmController.getAPharm))
+  .put(async(PharmController.updatePharm))
+  .delete(async(PharmController.deletePharm));
 
 export default router;
