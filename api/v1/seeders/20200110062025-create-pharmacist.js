@@ -5,20 +5,18 @@ module.exports = {
   up: (queryInterface) => {
     return queryInterface.bulkInsert('users', [{
       id: uuid(),
-      email: 'pacifique.musigwa@gmail.com',
-      firstName: 'MUSIGWA',
-      lastName: 'Pacifique',
-      password: hashSync(process.env.ADMIN_PASSWORD_1, 10),
-      role: 'admin',
+      email: 'first.user@gmail.com',
+      firstName: 'First',
+      lastName: 'User',
+      password: hashSync('firstUser@545', 10),
       createdAt: new Date(),
       updatedAt: new Date(),
     }, {
       id: uuid(),
-      email: 'mcaleb808@gmail.com',
-      firstName: 'MUGISHA',
-      lastName: 'Caleb',
-      password: hashSync(process.env.ADMIN_PASSWORD_2, 10),
-      role: 'admin',
+      email: 'second.user@gmail.com',
+      firstName: 'Second',
+      lastName: 'User',
+      password: hashSync('secondUser@545', 10),
       createdAt: new Date(),
       updatedAt: new Date(),
     }

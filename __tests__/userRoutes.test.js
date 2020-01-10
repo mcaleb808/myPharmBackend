@@ -91,18 +91,6 @@ describe('User routes tests', () => {
     expect(res.statusCode).toBe(401);
   });
 
-  it('it should fail to create an admin', async () => {
-    await newAdmin.update({ role: 'pharm' });
-    token = await tokenHandler(newAdmin);
-    user.role = 'pharmacist';
-    const res = await request(app)
-      .post('/api/v1/users')
-      .set('token', token)
-      .send({ ...user });
-    expect(res.body.message).toBe('Role not found: "pharm"');
-    expect(res.statusCode).toBe(500);
-  });
-
   it('it should fail to create an admin with fake token', async () => {
     const res = await request(app)
       .post('/api/v1/users')

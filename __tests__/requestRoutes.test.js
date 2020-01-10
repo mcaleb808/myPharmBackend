@@ -1,12 +1,15 @@
 import request from 'supertest';
 import server from '../api';
+import { User } from '../api/v1/models';
 
 describe('Testing membership request routes', () => {
   let app;
   const fakeID = '11772db9-7ff2-4d92-a1ef-75f0f1410deb';
   const baseURL = '/api/v1/requests';
-  beforeAll(() => {
+  beforeAll(async () => {
     app = server;
+    const users = await User.findAll().map(user => user.get());
+    console.log('=========should be a list==========', users);
     return app.close();
   });
 
@@ -18,7 +21,7 @@ describe('Testing membership request routes', () => {
       expect(res.body.message).toMatch(/No token/);
     });
 
-    it.skip("should return a 403 if the user doesn't have sufficient permission", async () => {
+    it("should return a 403 if the user doesn't have sufficient permission", async () => {
       const res = await request(app).patch(`${baseURL}/${fakeID}/confirm`);
       expect(res.status).toBe(403);
       expect(res.body.message).toMatch(/You don't have permission/);
