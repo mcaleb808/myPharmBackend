@@ -29,6 +29,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      repId: {
+        type: Sequelize.UUID,
+        references: { model: 'users', key: 'id' }
+      },
       status: {
         type: Sequelize.ENUM,
         values: ['pending', 'rejected', 'approved'],

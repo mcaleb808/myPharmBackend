@@ -87,8 +87,8 @@ describe('User routes tests', () => {
       .post('/api/v1/users')
       .set('token', token)
       .send({ ...user });
-    expect(res.body.message).toMatch(/You don't have enough permission/);
-    expect(res.statusCode).toBe(401);
+    expect(res.body.message).toMatch(/You don't have permission/);
+    expect(res.statusCode).toBe(403);
   });
 
   it('it should fail to create an admin with fake token', async () => {

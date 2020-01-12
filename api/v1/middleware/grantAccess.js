@@ -13,7 +13,7 @@ export default (action, resource) => {
   return async (req, res, next) => {
     const permission = roles.can(req.user.role)[action](resource);
     if (!permission.granted) {
-      util.setError(401, "You don't have enough permission to perform this action");
+      util.setError(403, "You don't have permission to perform this action");
       return util.send(res);
     }
     return next();

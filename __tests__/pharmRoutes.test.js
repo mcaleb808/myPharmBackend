@@ -1,5 +1,6 @@
 import request from 'supertest';
 import server from '../api';
+import { Pharmacy } from '../api/v1/models';
 
 describe('', () => {
   let app;
@@ -14,6 +15,7 @@ describe('', () => {
     const fakeId = '11772db9-7ff2-4d92-a1ef-75f0f1410deb';
 
     it('it should fail to fetch pharmacies', async () => {
+      await Pharmacy.destroy({ truncate: true });
       const res = await request(app).get('/api/v1/pharmacies');
       expect(res.statusCode).toEqual(404);
       expect(res.body.message).toBe('No pharmacy found');

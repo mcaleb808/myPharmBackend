@@ -61,8 +61,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   );
-  Pharmacy.associate = _models => {
-    // associations can be defined here
+  Pharmacy.associate = ({ User }) => {
+    Pharmacy.belongsTo(User, { foreignKey: 'repId', as: 'owner' });
   };
   return Pharmacy;
 };

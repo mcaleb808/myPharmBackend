@@ -8,7 +8,7 @@ module.exports = {
       email: 'first.user@gmail.com',
       firstName: 'First',
       lastName: 'User',
-      password: hashSync('firstUser@545', 10),
+      password: hashSync('GogfiD3hFO2d', 10),
       createdAt: new Date(),
       updatedAt: new Date(),
     }, {
@@ -16,7 +16,7 @@ module.exports = {
       email: 'second.user@gmail.com',
       firstName: 'Second',
       lastName: 'User',
-      password: hashSync('secondUser@545', 10),
+      password: hashSync('GogfiD3hFO2d', 10),
       createdAt: new Date(),
       updatedAt: new Date(),
     }

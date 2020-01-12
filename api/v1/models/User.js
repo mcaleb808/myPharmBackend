@@ -18,10 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       lastName: {
         type: DataTypes.STRING,
-        allowNull: {
-          args: false,
-          msg: 'Must provide the last name of the user'
-        }
       },
       email: {
         type: DataTypes.STRING,
@@ -53,8 +49,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   );
-  User.associate = models => {
-    User.belongsTo(models.Pharmacy, { foreignKey: 'id', as: 'pharmacyId' });
+  User.associate = ({ Pharmacy }) => {
+    User.hasOne(Pharmacy, { foreignKey: 'id', as: 'userId' });
   };
   return User;
 };
