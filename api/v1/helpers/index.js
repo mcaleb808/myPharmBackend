@@ -1,30 +1,28 @@
 import mailer from 'nodemailer';
 
 const defaults = {
-  subject: 'Hello Pacific',
-  text: 'Hope this email finds you well.',
-  html: '<b>I have good news for you ma bro</b>' // html body
+  from: '',
+  subject: 'PharmLoc account notification.',
+  text: 'Hello, your pharmacy membership request was reviewed and approved.',
+  html: ''
 };
+const { SMTP_USER, SMTP_PASSWORD } = process.env;
 
 export default class Helpers {
   static async sendEmail(recipients = [] || '', options = defaults) {
-    const testAccount = await mailer.createTestAccount();
     const transporter = mailer.createTransport({
-      host: 'smtp.ethereal.email',
+      service: 'gmail',
       port: 587,
-      auth: {
-        user: testAccount.user,
-        pass: testAccount.pass
-      },
-      tls: { rejectUnauthorized: false }
+      tls: { rejectUnauthorized: false },
+      auth: { user: SMTP_USER, pass: SMTP_PASSWORD }
     });
-
-    return transporter.sendMail({
-      from: testAccount.user,
+    const mailOptions = {
+      ...options,
+      from: SMTP_USER,
       to: typeof recipients === 'object' && recipients.length
         ? recipients.join(', ')
         : recipients,
-      ...options
-    });
+    };
+    return transporter.sendMail(mailOptions);
   }
 }

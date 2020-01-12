@@ -2,12 +2,18 @@ import request from 'supertest';
 import server from '../api';
 import { User, Pharmacy } from '../api/v1/models';
 
+const nodemailer = require('nodemailer');
+
+const sendMailMock = jest.fn().mockReturnValue('Email sent!!');
 const baseURL = '/api/v1/requests';
+jest.mock('nodemailer');
+nodemailer.createTransport.mockReturnValue({ sendMail: sendMailMock });
 
 describe('Testing membership request routes', () => {
   let app, pharmacies, users, pharmacists, admins, pharmacist, admin;
   beforeAll(async () => {
     app = server;
+
     users = await User.findAll().map(user => user.get());
     pharmacies = await Pharmacy.findAll({ where: { status: 'pending' } })
       .map(pharmacy => pharmacy.get());
@@ -24,6 +30,9 @@ describe('Testing membership request routes', () => {
       .post('/api/v1/users/login')
       .send({ email: admin.email, password: process.env.ADMIN_PASSWORD });
     admin.token = adminToken;
+
+    sendMailMock.mockClear();
+    nodemailer.createTransport.mockClear();
     return app.close();
   });
 
@@ -46,10 +55,6 @@ describe('Testing membership request routes', () => {
       const res = await request(app).patch(`${baseURL}/${users[0].id}/confirm`).set('token', admin.token);
       expect(res.status).toBe(404);
       expect(res.body.message).toMatch(/We don't have such membership/);
-    });
-
-    it.skip('should send the confirmation email once approved successfully', async () => {
-      // TODO: Mock the email confirmation
     });
 
     it('should return a 200 request confirmation is successful', async () => {
