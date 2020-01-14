@@ -1,7 +1,7 @@
 import { generate } from 'generate-password';
 import models from '../models';
 import utils from '../utils/utils';
-import Helpers from '../helpers';
+import Emails from '../helpers/emailHandler';
 
 const { Pharmacy, User } = models;
 
@@ -16,8 +16,10 @@ class MembershipController {
    * @memberof MembershipController
    */
   static async confirm({ params }, res) {
-    const [updated, pharmacies] = await Pharmacy.scope('pending')
-      .update({ status: 'approved' }, { where: { id: params.id }, });
+    const [updated, pharmacies] = await Pharmacy.scope('pending').update(
+      { status: 'approved' },
+      { where: { id: params.id } }
+    );
     if (!updated) {
       return res.status(404).json({ message: "We don't have such membership request" });
     }
@@ -27,7 +29,7 @@ class MembershipController {
     const password = generate({ numbers: true, length: 12 });
     const user = await User.create({ firstName, lastName, email, password });
     await Pharmacy.update({ repId: user.id }, { where: { id: pharmacy.id } });
-    await Helpers.sendEmail(email);
+    await Emails.sendEmail(email, firstName, password);
     utils.setSuccess(200, 'The request confirmation successful', { pharmacy });
     return utils.send(res);
   }
