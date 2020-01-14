@@ -1,6 +1,6 @@
 @contentType = application/json
 @baseURL = {{$dotenv BASE_URL}}
-@reqID = cb9907f5-1ec1-428b-a246-fe7390f80ae2
+@reqID = 3a7cca71-5389-4bee-bc69-09d375bcd4a4
 
 ### CREATE A NEW USER
 POST {{baseURL}}/users HTTP/1.1
@@ -29,7 +29,7 @@ Content-Type: {{contentType}}
 {
 	"name": "Kipharma",
 	"insurances": ["UAP", "RSSB", "MMI", "RAMA"],
-	"email": "kipharma@gmail.com",
+	"email": "mcaleb808@gmail.com",
 	"telephone": "9791857677",
 	"pharmRep": "mugisha"
 }

@@ -51,6 +51,7 @@ class UserController {
         return util.send(res);
       }
       const token = tokenHandler(checkUser);
+      checkUser.password = undefined;
       util.setSuccess(200, 'Admin successfully logged in', { token, user: checkUser });
       return util.send(res);
     } catch (err) {
