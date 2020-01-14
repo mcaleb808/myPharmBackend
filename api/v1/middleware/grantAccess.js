@@ -1,20 +1,21 @@
 import roles from '../helpers/roles';
 import util from '../utils/utils';
 
-const grantAccess = (action, resource) => {
+/**
+ * @description This checks for access level and rejects the request or pass control
+ * to the next middleware function
+ * @author Caleb
+ * @param  {string} [action='readAny'] An intended action the user wants to perform
+ * @param  {string} [resource='profile'] The resource the user attempts to access
+ * @return {function} This is the request middleware function
+ */
+export default (action, resource) => {
   return async (req, res, next) => {
-    try {
-      const permission = roles.can(req.user.role)[action](resource);
-      if (!permission.granted) {
-        util.setError(401, "You don't have enough permission to perform this action");
-        return util.send(res);
-      }
-      next();
-    } catch (err) {
-      util.setError(500, err.message);
+    const permission = roles.can(req.user.role)[action](resource);
+    if (!permission.granted) {
+      util.setError(403, "You don't have permission to perform this action");
       return util.send(res);
     }
+    return next();
   };
 };
-
-export default grantAccess;

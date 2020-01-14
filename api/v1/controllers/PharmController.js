@@ -16,9 +16,7 @@ class PharmController {
 
   static async addPharm(req, res) {
     const newPharm = req.body;
-
     const insurances = [...new Set(newPharm.insurances)];
-
     try {
       const createPharm = await PharmService.addPharm({
         name: newPharm.name,

@@ -39,14 +39,30 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       status: {
-        type: DataTypes.STRING,
-        defaultValue: 'request'
+        type: DataTypes.ENUM,
+        values: ['pending', 'rejected', 'approved'],
+        defaultValue: 'pending'
       }
     },
-    {}
+    {
+      tableName: 'pharmacies',
+      defaultScope: {
+        attributes: { exclude: ['deletedAt'] }
+      },
+      timestamps: true,
+      paranoid: true,
+      scopes: {
+        pending: {
+          where: { status: 'pending' },
+          returning: true,
+          validate: true,
+          paranoid: true,
+        },
+      }
+    }
   );
-  Pharmacy.associate = _models => {
-    // associations can be defined here
+  Pharmacy.associate = ({ User }) => {
+    Pharmacy.belongsTo(User, { foreignKey: 'repId', as: 'owner' });
   };
   return Pharmacy;
 };

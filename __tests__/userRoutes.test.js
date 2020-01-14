@@ -1,9 +1,9 @@
 import request from 'supertest';
 import server from '../api';
 import { User } from '../api/v1/models';
-import user from './_mocks_/user.json';
+import user from './__mocks__/user.json';
 import tokenHandler from '../api/v1/helpers/tokenHandler';
-import { fakeToken, invalidToken1 } from './_mocks_/data';
+import { fakeToken, invalidToken1 } from './__mocks__/data';
 
 describe('User routes tests', () => {
   let app, token, newAdmin;
@@ -53,7 +53,7 @@ describe('User routes tests', () => {
       .post('/api/v1/users')
       .set('token', token)
       .send({ ...user, email: 'caleb@mugisha.com' });
-    expect(res.body.message).toBe('admin created successfully');
+    expect(res.body.message).toMatch(/admin created/);
     expect(res.statusCode).toBe(201);
   });
 
@@ -87,20 +87,8 @@ describe('User routes tests', () => {
       .post('/api/v1/users')
       .set('token', token)
       .send({ ...user });
-    expect(res.body.message).toMatch(/You don't have enough permission/);
-    expect(res.statusCode).toBe(401);
-  });
-
-  it('it should fail to create an admin', async () => {
-    await newAdmin.update({ role: 'pharm' });
-    token = await tokenHandler(newAdmin);
-    user.role = 'pharmacist';
-    const res = await request(app)
-      .post('/api/v1/users')
-      .set('token', token)
-      .send({ ...user });
-    expect(res.body.message).toBe('Role not found: "pharm"');
-    expect(res.statusCode).toBe(500);
+    expect(res.body.message).toMatch(/You don't have permission/);
+    expect(res.statusCode).toBe(403);
   });
 
   it('it should fail to create an admin with fake token', async () => {
@@ -108,8 +96,8 @@ describe('User routes tests', () => {
       .post('/api/v1/users')
       .set('token', fakeToken)
       .send({ ...user });
-    expect(res.body.message).toBe('the user who belong to this token does not exist.');
-    expect(res.statusCode).toBe(403);
+    expect(res.body.message).toMatch(/Invalid credentials/);
+    expect(res.statusCode).toBe(401);
   });
 
   it('it should fail to create an admin without a token', async () => {
@@ -125,7 +113,7 @@ describe('User routes tests', () => {
       .post('/api/v1/users')
       .set('token', invalidToken1)
       .send({ ...user });
-    expect(res.body.message).toBe('your token is invalid.');
-    expect(res.statusCode).toBe(400);
+    expect(res.body.message).toMatch(/Invalid credential/);
+    expect(res.statusCode).toBe(401);
   });
 });

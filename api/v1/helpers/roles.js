@@ -10,6 +10,7 @@ const roles = (() => {
   ac.grant('admin')
     .readAny('pharm')
     .updateAny('pharm')
+    .updateAny('profile')
     .deleteAny('pharm');
 
   return ac;

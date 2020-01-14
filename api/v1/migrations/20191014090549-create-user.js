@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('users', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -19,12 +19,13 @@ module.exports = {
         unique: true
       },
       password: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
       },
       role: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.ENUM,
+        defaultValue: 'pharmacist',
+        values: ['pharmacist', 'admin']
       },
       createdAt: {
         allowNull: false,
@@ -33,10 +34,11 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      deletedAt: { type: Sequelize.DATE }
     });
   },
   down: (queryInterface, _Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('users');
   }
 };

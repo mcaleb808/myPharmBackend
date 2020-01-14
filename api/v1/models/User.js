@@ -18,10 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       lastName: {
         type: DataTypes.STRING,
-        allowNull: {
-          args: false,
-          msg: 'Must provide the last name of the user'
-        }
       },
       email: {
         type: DataTypes.STRING,
@@ -29,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: { args: true, msg: 'Email address already in use!' }
       },
       password: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
       },
       role: {
@@ -39,16 +35,22 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
+      tableName: 'users',
+      defaultScope: {
+        attributes: { exclude: ['deletedAt'] }
+      },
+      timestamps: true,
+      paranoid: true,
       hooks: {
-        beforeCreate: user => {
+        beforeSave: user => {
           const salt = bcrypt.genSaltSync();
           user.password = bcrypt.hashSync(user.password, salt);
         }
       }
     }
   );
-  User.associate = models => {
-    User.belongsTo(models.Pharmacy, { foreignKey: 'id', as: 'pharmacyId' });
+  User.associate = ({ Pharmacy }) => {
+    User.hasOne(Pharmacy, { foreignKey: 'id', as: 'userId' });
   };
   return User;
 };

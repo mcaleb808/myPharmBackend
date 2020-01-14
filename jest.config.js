@@ -6,6 +6,7 @@ module.exports = {
   clearMocks: true,
   collectCoverageFrom: [
     'api/**/*.js',
+    '!**/seed**/**',
     '!**/coverage/**',
     '!**/node_modules/**',
     '!**/jest.config.js',

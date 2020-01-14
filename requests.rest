@@ -1,0 +1,44 @@
+@contentType = application/json
+@baseURL = {{$dotenv BASE_URL}}
+@reqID = cb9907f5-1ec1-428b-a246-fe7390f80ae2
+
+### CREATE A NEW USER
+POST {{baseURL}}/users HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+	"email":"claude.kaberuka@gmail.com",
+	"firstName": "Claude",
+	"lastName": "Kaberuka",
+	"password": "kabec12345"
+}
+
+### LOGIN THE USER
+POST {{baseURL}}/users/login HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+	"email":"pacifique.musigwa@gmail.com",
+	"password": "{{$dotenv ADMIN_PASSWORD}}"
+}
+
+### CREATE A PHARMACY
+POST {{baseURL}}/pharmacies HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+	"name": "Kipharma",
+	"insurances": ["UAP", "RSSB", "MMI", "RAMA"],
+	"email": "kipharma@gmail.com",
+	"telephone": "9791857677",
+	"pharmRep": "mugisha"
+}
+
+### GET ALL THE MEMBERSHIP REQUESTS
+GET {{baseURL}}/requests HTTP/1.1
+Content-Type: {{contentType}}
+
+### CONFIRM THE MEMBERSHIP REQUEST
+PATCH {{baseURL}}/requests/{{reqID}}/confirm HTTP/1.1
+Content-Type: {{contentType}}
+token: {{$dotenv ADMIN_TOKEN}}
