@@ -6,7 +6,7 @@ const mailBody = (email, firstName, password) => {
   <div>
     <img
       alt="Image"
-      src="https://res.cloudinary.com/ddsybt1qk/image/upload/v1578984977/Screen_Shot_2020-01-13_at_08.50.20_gxwo2x.png"
+      src="https://res.cloudinary.com/ddsybt1qk/image/upload/v1579004982/665aac2e-cdfd-4768-b1a6-6c8bbd1d36bd_200x200_1_1_jjbc0a.png"
       title="Image"
       width="162"
     />
