@@ -29,7 +29,7 @@ class MembershipController {
     const password = generate({ numbers: true, length: 12 });
     const user = await User.create({ firstName, lastName, email, password });
     await Pharmacy.update({ repId: user.id }, { where: { id: pharmacy.id } });
-    await Emails.sendEmail(email);
+    await Emails.sendEmail(email, firstName, password);
     utils.setSuccess(200, 'The request confirmation successful', { pharmacy });
     return utils.send(res);
   }

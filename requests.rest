@@ -1,7 +1,6 @@
 @contentType = application/json
 @baseURL = {{$dotenv BASE_URL}}
-@reqID = 3a7cca71-5389-4bee-bc69-09d375bcd4a4
-
+@reqID = 2389bce2-0f0a-411a-827a-d03ab4945872
 ### CREATE A NEW USER
 POST {{baseURL}}/users HTTP/1.1
 Content-Type: {{contentType}}
@@ -18,7 +17,7 @@ POST {{baseURL}}/users/login HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-	"email":"pacifique.musigwa@gmail.com",
+	"email":"pacifique.musigwax@gmail.com",
 	"password": "{{$dotenv ADMIN_PASSWORD}}"
 }
 
@@ -29,9 +28,9 @@ Content-Type: {{contentType}}
 {
 	"name": "Kipharma",
 	"insurances": ["UAP", "RSSB", "MMI", "RAMA"],
-	"email": "mcaleb808@gmail.com",
+	"email": "pacifique.musigwa@gmail.com",
 	"telephone": "9791857677",
-	"pharmRep": "mugisha"
+	"pharmRep": "Musigwa Pacifique"
 }
 
 ### GET ALL THE MEMBERSHIP REQUESTS
